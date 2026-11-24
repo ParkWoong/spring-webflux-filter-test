@@ -37,6 +37,10 @@ mvn spring-boot:run
 
 POST text to /sample. FilterTest checks request ID creation. The application listens on localhost:8080.
 
+#### Postman API
+
+Send POST http://localhost:8080/sample with Content-Type: text/plain and raw body hello. Expected: HTTP 200 with body hello. The request filter creates an ID and the history filter stores redacted metadata in H2.
+
 ## KR
 
 ### 프로젝트 구조
@@ -71,3 +75,7 @@ mvn spring-boot:run
 ```
 
 /sample에 텍스트를 POST 하세요. FilterTest는 요청 ID 생성을 확인합니다. 앱은 localhost:8080에서 실행됩니다.
+
+#### Postman API
+
+Content-Type: text/plain으로 POST http://localhost:8080/sample에 raw 본문 hello를 보내세요. 예상 결과: HTTP 200과 본문 hello입니다. 요청 필터는 ID를 만들고 기록 필터는 가린 메타데이터를 H2에 저장합니다.
