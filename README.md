@@ -23,7 +23,9 @@ src/test/java/io/github/parkwoong/gateway/FilterTest.java
 
 ### Code explanation
 
-RequestDecorator adds a request ID to the exchange. HistoryLogger reads and replays the request body, wraps the response, and stores request metadata in H2. The sample handler returns the POST body. Stored headers and bodies are redacted.
+RequestDecorator adds a request ID to the exchange. HistoryLogger reads and replays the request
+body, wraps the response, and stores request metadata in H2. The sample handler returns the POST
+body. Stored headers and bodies are redacted.
 
 ### Run and test
 
@@ -35,11 +37,30 @@ mvn clean verify
 mvn spring-boot:run
 ```
 
-POST text to /sample. FilterTest checks request ID creation. The application listens on localhost:8080.
+POST text to /sample. FilterTest checks request ID creation. The application listens on
+localhost:8080.
 
 #### Postman API
 
-Send POST http://localhost:8080/sample with Content-Type: text/plain and raw body hello. Expected: HTTP 200 with body hello. The request filter creates an ID and the history filter stores redacted metadata in H2.
+##### Echo through the filters
+
+**Request**
+
+- Method: POST
+- URL: http://localhost:8080/sample
+- Content-Type: text/plain
+
+~~~text
+hello
+~~~
+
+**Response**
+
+- Status: 200 OK
+
+~~~text
+hello
+~~~
 
 ## KR
 
@@ -62,11 +83,13 @@ src/test/java/io/github/parkwoong/gateway/FilterTest.java
 
 ### 코드 설명
 
-RequestDecorator가 exchange에 요청 ID를 넣습니다. HistoryLogger가 요청 본문을 읽고 다시 전달하며 응답을 감싼 뒤 요청 메타데이터를 H2에 저장합니다. 샘플 핸들러는 POST 본문을 반환합니다. 저장되는 헤더와 본문은 가립니다.
+RequestDecorator가 exchange에 요청 ID를 넣는다. HistoryLogger가 요청 본문을 읽고 다시
+전달하며 응답을 감싼 뒤 요청 메타데이터를 H2에 저장한다. 샘플 핸들러는 POST 본문을 반환한다. 저장되는 헤더와
+본문은 가린다.
 
 ### 실행과 테스트
 
-JDK 8과 Maven 3.6.3 이상을 사용합니다.
+JDK 8, Maven 3.6.3 이상 사용. 저장소 루트에서 실행.
 
 ```sh
 java -version
@@ -74,8 +97,27 @@ mvn clean verify
 mvn spring-boot:run
 ```
 
-/sample에 텍스트를 POST 하세요. FilterTest는 요청 ID 생성을 확인합니다. 앱은 localhost:8080에서 실행됩니다.
+/sample에 텍스트를 POST . FilterTest는 요청 ID 생성을 확인한다. 앱은 localhost:8080에서
+실행된다.
 
 #### Postman API
 
-Content-Type: text/plain으로 POST http://localhost:8080/sample에 raw 본문 hello를 보내세요. 예상 결과: HTTP 200과 본문 hello입니다. 요청 필터는 ID를 만들고 기록 필터는 가린 메타데이터를 H2에 저장합니다.
+##### 필터를 거쳐 본문 반환
+
+**요청**
+
+- 메서드: POST
+- URL: http://localhost:8080/sample
+- Content-Type: text/plain
+
+~~~text
+hello
+~~~
+
+**응답**
+
+- 상태: 200 OK
+
+~~~text
+hello
+~~~
